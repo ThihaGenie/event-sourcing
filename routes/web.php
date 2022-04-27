@@ -68,7 +68,7 @@ Route::get("update-product/{uuid}", function($uuid) {
     $product = Product::uuid($uuid);
     $product->updateProduct([
         'unit_price'  => 34000000,
-        'unit_count' => 40
+        'unit_count' => 5
     ]);
     return Product::all();
 });
