@@ -3,6 +3,7 @@
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEvent as StoredEvent;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,8 +45,10 @@ Route::get('/create-user', function() {
     return User::all(); 
 });
 
-Route::get('delete-user/{uuid}', function($uuid) {
-    $user = User::uuid($uuid);
-    $user->remove();
-    return "User is already removed!";
+Route::get("esquery", function() {
+    $event = StoredEvent::query()
+        ->where('id', 2)
+        ->first();
+
+    return $event;
 });
