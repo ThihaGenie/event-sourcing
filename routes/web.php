@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
@@ -51,4 +52,23 @@ Route::get("esquery", function() {
         ->first();
 
     return $event;
+});
+
+Route::get("create-product", function() {
+    $created_product = Product::createWithAttributes([
+        'name'  => 'iPad Pro Max',
+        'unit_price' => 5000000,
+        'unit_count' => 30
+    ]);
+
+    return Product::all();
+});
+
+Route::get("update-product/{uuid}", function($uuid) {
+    $product = Product::uuid($uuid);
+    $product->updateProduct([
+        'unit_price'  => 34000000,
+        'unit_count' => 40
+    ]);
+    return Product::all();
 });
