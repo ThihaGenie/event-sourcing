@@ -6,9 +6,11 @@ use App\Models\Product;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
+use Illuminate\Foundation\Testing\WithFaker;
 
 class ProductSeeder extends Seeder
 {
+    use WithFaker;
     /**
      * Run the database seeds.
      *
@@ -16,12 +18,11 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create();
         for($i = 0; $i < 20; $i++) {
             Product::createWithAttributes([
-                'name'  => $faker->name(),
-                'unit_price' => $faker->randomFloat(2, 100, 30000),
-                'unit_count' => $faker->numberBetween(10, 200)
+                'name'  => $this->faker->name(),
+                'unit_price' => $this->faker->randomFloat(2, 100, 30000),
+                'unit_count' => $this->faker->numberBetween(10, 200)
             ]);
         }
     }
