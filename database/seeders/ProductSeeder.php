@@ -18,6 +18,7 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
+        $this->setUpFaker();
         for($i = 0; $i < 20; $i++) {
             Product::createWithAttributes([
                 'name'  => $this->faker->name(),

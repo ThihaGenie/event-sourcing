@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
     */
     public function run()
     {
+        $this->setUpFaker();
         User::createWithAttributes([
             'name' => 'Thiha',
             'email' => 'thiha@gmail.com',
