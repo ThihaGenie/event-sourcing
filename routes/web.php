@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -48,9 +49,9 @@ Route::get('/create-user', function() {
 
 Route::get("esquery", function() {
     $event = StoredEvent::query()
-        ->where('id', 3)
-        ->first();
-
+    ->where('id', 3)
+    ->first();
+    
     return $event->event_properties['userAttributes'];
 });
 
@@ -60,7 +61,7 @@ Route::get("create-product", function() {
         'unit_price' => 5000000,
         'unit_count' => 30
     ]);
-
+    
     return Product::all();
 });
 
@@ -72,3 +73,28 @@ Route::get("update-product/{uuid}", function($uuid) {
     ]);
     return Product::all();
 });
+
+Route::get('order-product', function() {
+    $user = User::find(1);
+    $products = [
+        [
+            "product"   => Product::find(1),
+            "ordered_quantity" => 3,
+        ],
+        [
+            "product"   => Product::find(2),
+            "ordered_quantity" => 1,
+        ],
+        [
+            "product"   => Product::find(3),
+            "ordered_quantity" => 5,
+        ]
+        
+    ];
+    Order::createWithAttributes([
+        "user"  => $user->id,
+        "products" => $products
+    ]);
+    return "Order has been submitted!";
+});
+    
