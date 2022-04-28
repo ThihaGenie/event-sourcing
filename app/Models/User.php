@@ -50,12 +50,7 @@ class User extends Authenticatable
 
     public static function createWithAttributes(array $attributes): User {
         $attributes['uuid'] = (string) Uuid::uuid4();
-
-        /**
-         * Trigger the event to create new user
-         */
         event(new UserCreated($attributes));
-
         return static::uuid($attributes['uuid']);
     }
 

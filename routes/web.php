@@ -48,10 +48,10 @@ Route::get('/create-user', function() {
 
 Route::get("esquery", function() {
     $event = StoredEvent::query()
-        ->where('id', 2)
+        ->where('id', 3)
         ->first();
 
-    return $event;
+    return $event->event_properties['userAttributes'];
 });
 
 Route::get("create-product", function() {

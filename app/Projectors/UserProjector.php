@@ -11,6 +11,7 @@ class UserProjector extends Projector
 {
     public function onUserCreated(UserCreated $event)
     {
+        // Database Action
         User::create($event->userAttributes);
     }
 
